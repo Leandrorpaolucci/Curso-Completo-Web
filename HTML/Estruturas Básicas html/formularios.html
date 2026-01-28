@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulários</title>
+  </head>
+  <body>
+
+    <h2>Login</h2>
+    <form>
+      Login: <br />
+      <input
+        type="text"
+        name="usuario"
+        placeholder="Digite o nome de usuário"
+      /><br />
+
+      Senha: <br />
+      <input type="password" name="senha" placeholder="Digite a sua senha" />
+      <br />
+
+      <input type="submit" value="logar" />
+    </form>
+
+    <h2>Não tem uma conta ? Cadastre-se</h2>
+    <form>
+      Login: <br />
+      <input type="text" nome="usuario_login" />
+      <br />
+      Senha: <br />
+      <input type="password" name="senha" /><br />
+      Sexo: <br>
+      <input type="radio" name="sexo" value="masculino"> Masculino <br>
+      <input type="radio" name="sexo" value="feminino"> Feminino <br>
+      <input type="radio" name="outro" value="outro"> Outro <br>
+      <br>
+
+      <h4>Interesses</h4> <br>
+      <input type="checkbox"> Futebol
+      <input type="checkbox"> Filmes
+      <input type="checkbox"> Séries
+      <input type="checkbox"> Cinema
+      <input type="checkbox"> Cursos
+      <input type="checkbox"> Moda
+
+      <h4>Estado</h4>
+
+      <select>
+        <option value="AM">SP</option>
+        <option value="AP">AP</option>
+        <option value="BH">BH</option>
+        <option value="RJ">RJ</option>
+        <option value="RS">RS</option>
+        <option value="MS">MS</option>
+        <option value="SP">SP</option>
+      </select>
+      <br>
+
+      <h4>Observações:</h4> <br>
+      <textarea name="observacoes" id="obs"></textarea> <br>
+
+      <input type="submit" value="Cadatrar">
+    </form>
+  </body>
+</html>

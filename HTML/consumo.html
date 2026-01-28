@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Consumo de Energia</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 8px;
+        }
+        input, select, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+        }
+        button {
+            background: #2e86de;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1e6bb8;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #eee;
+        }
+        .remover {
+            background: #e74c3c;
+        }
+        .totais {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        canvas {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Controle de Consumo de Energia</h2>
+
+    <label>Mês</label>
+    <select id="mes" onchange="carregarMes()">
+        <option value="Janeiro">Janeiro</option>
+        <option value="Fevereiro">Fevereiro</option>
+        <option value="Março">Março</option>
+        <option value="Abril">Abril</option>
+        <option value="Maio">Maio</option>
+        <option value="Junho">Junho</option>
+        <option value="Julho">Julho</option>
+        <option value="Agosto">Agosto</option>
+        <option value="Setembro">Setembro</option>
+        <option value="Outubro">Outubro</option>
+        <option value="Novembro">Novembro</option>
+        <option value="Dezembro">Dezembro</option>
+    </select>
+
+    <label>Aparelho</label>
+    <input type="text" id="aparelho">
+
+    <label>Potência (Watts)</label>
+    <input type="number" id="watts">
+
+    <label>Horas por dia</label>
+    <input type="number" id="horas">
+
+    <label>Dias no mês</label>
+    <input type="number" id="dias" value="30">
+
+    <label>Valor do kWh (R$)</label>
+    <input type="number" step="0.01" id="valorKwh" value="0.80">
+
+    <button onclick="adicionar()">Adicionar aparelho</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Aparelho</th>
+                <th>Consumo (kWh)</th>
+                <th>Custo (R$)</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody id="lista"></tbody>
+    </table>
+
+    <div class="totais" id="totais"></div>
+
+    <canvas id="grafico"></canvas>
+</div>
+
+<script>
+let dados = JSON.parse(localStorage.getItem("energia")) || {};
+let chart;
+
+function mesAtual() {
+    return document.getElementById("mes").value;
+}
+
+function carregarMes() {
+    atualizarTabela();
+}
+
+function adicionar() {
+    const mes = mesAtual();
+    const aparelho = document.getElementById("aparelho").value;
+    const watts = parseFloat(document.getElementById("watts").value);
+    const horas = parseFloat(document.getElementById("horas").value);
+    const dias = parseFloat(document.getElementById("dias").value);
+    const valorKwh = parseFloat(document.getElementById("valorKwh").value);
+
+    if (!aparelho || isNaN(watts) || isNaN(horas)) {
+        alert("Preencha corretamente.");
+        return;
+    }
+
+    const consumo = (watts / 1000) * horas * dias;
+    const custo = consumo * valorKwh;
+
+    if (!dados[mes]) dados[mes] = [];
+
+    dados[mes].push({ aparelho, consumo, custo });
+
+    salvar();
+    atualizarTabela();
+    limpar();
+}
+
+function atualizarTabela() {
+    const mes = mesAtual();
+    const lista = document.getElementById("lista");
+    lista.innerHTML = "";
+
+    let totalConsumo = 0;
+    let totalCusto = 0;
+
+    (dados[mes] || []).forEach((item, index) => {
+        totalConsumo += item.consumo;
+        totalCusto += item.custo;
+
+        lista.innerHTML += `
+            <tr>
+                <td>${item.aparelho}</td>
+                <td>${item.consumo.toFixed(2)}</td>
+                <td>R$ ${item.custo.toFixed(2)}</td>
+                <td>
+                    <button class="remover" onclick="remover(${index})">X</button>
+                </td>
+            </tr>
+        `;
+    });
+
+    document.getElementById("totais").innerHTML =
+        `Consumo do mês: ${totalConsumo.toFixed(2)} kWh | Valor: R$ ${totalCusto.toFixed(2)}`;
+
+    atualizarGrafico();
+}
+
+function remover(index) {
+    dados[mesAtual()].splice(index, 1);
+    salvar();
+    atualizarTabela();
+}
+
+function salvar() {
+    localStorage.setItem("energia", JSON.stringify(dados));
+}
+
+function limpar() {
+    document.getElementById("aparelho").value = "";
+    document.getElementById("watts").value = "";
+    document.getElementById("horas").value = "";
+}
+
+function atualizarGrafico() {
+    const meses = Object.keys(dados);
+    const consumos = meses.map(m =>
+        dados[m].reduce((s, a) => s + a.consumo, 0)
+    );
+
+    if (chart) chart.destroy();
+
+    chart = new Chart(document.getElementById("grafico"), {
+        type: "bar",
+        data: {
+            labels: meses,
+            datasets: [{
+                label: "Consumo (kWh)",
+                data: consumos,
+                backgroundColor: "#2e86de"
+            }]
+        }
+    });
+}
+
+carregarMes();
+</script>
+
+</body>
+</html>

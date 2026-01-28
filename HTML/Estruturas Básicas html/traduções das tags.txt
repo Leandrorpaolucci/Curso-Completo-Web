@@ -1,0 +1,120 @@
+Traduções e explicações das principais tags HTML
+📄 Estrutura do documento
+
+html → indica o início do documento HTML.
+
+head → cabeça do site (configurações, título, metadados).
+
+body → corpo do site (tudo que aparece na tela).
+
+📝 Textos e formatação
+
+p vem de paragraph → parágrafo.
+
+br vem de break → quebra de linha.
+
+hr vem de horizontal rule → linha horizontal (separador).
+
+h1 → cabeçalho nível 1 (título principal).
+
+h2 → cabeçalho nível 2.
+
+h3 → cabeçalho nível 3.
+
+h4 → cabeçalho nível 4.
+
+h5 → cabeçalho nível 5.
+
+h6 → cabeçalho nível 6.
+
+b → negrito (visual apenas).
+
+strong → texto forte/importante (semântico).
+
+i → itálico (visual).
+
+em vem de emphasis → ênfase no texto (semântico).
+
+mark → texto marcado (como marca-texto).
+
+small → texto pequeno.
+
+del → texto deletado/riscado.
+
+ins → texto inserido/sublinhado.
+
+🔗 Links e mídias
+
+a vem de anchor → link.
+
+img vem de image → imagem.
+
+audio → áudio.
+
+video → vídeo.
+
+source → fonte de áudio ou vídeo.
+
+📦 Organização e layout
+
+div → divisão/bloco genérico.
+
+span → container em linha (para pequenos trechos).
+
+section → seção do conteúdo.
+
+article → artigo/conteúdo independente.
+
+header → cabeçalho da página ou seção.
+
+footer → rodapé.
+
+main → conteúdo principal.
+
+nav → menu de navegação.
+
+aside → conteúdo lateral.
+
+📋 Listas
+
+ul vem de unordered list → lista não ordenada.
+
+ol vem de ordered list → lista ordenada.
+
+li vem de list item → item da lista.
+
+📊 Tabelas
+
+table → tabela.
+
+tr vem de table row → linha da tabela.
+
+td vem de table data → célula da tabela.
+
+th vem de table header → cabeçalho da tabela.
+
+thead → cabeçalho da tabela.
+
+tbody → corpo da tabela.
+
+tfoot → rodapé da tabela.
+
+🧾 Formulários
+
+form → formulário.
+
+input → campo de entrada.
+
+label → rótulo do campo.
+
+textarea → área de texto.
+
+button → botão.
+
+select → seleção.
+
+option → opção da seleção.
+
+fieldset → grupo de campos.
+
+legend → título do grupo.
