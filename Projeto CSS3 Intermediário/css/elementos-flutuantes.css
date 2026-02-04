@@ -1,0 +1,45 @@
+#principal {
+    border: 1px solid black;
+    background: green;
+}
+
+
+.conteudo0 {
+    background: blue;
+    border: 1px solid red;
+    width: 200px;
+    height: 200px;
+
+    margin: 20px;
+}
+
+.conteudo1 {
+    background: rgb(85, 211, 73);
+    border: 1px solid red;
+    width: 200px;
+    height: 200px;
+
+    margin: 20px;
+}
+
+.conteudo2 {
+    background: rgb(73, 190, 211);
+    border: 1px solid red;
+    width: 200px;
+    height: 200px;
+
+    margin: 20px;
+}
+
+.conteudo4 {
+    background: rgb(83, 7, 45);
+    border: 1px solid red;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+}
+
+
+.clear {
+    clear: left;
+}

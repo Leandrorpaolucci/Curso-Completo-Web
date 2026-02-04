@@ -1,0 +1,31 @@
+body {
+    background: #f4f4f4;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#principal {
+    width: 920px;
+
+
+}
+
+.imagem-galeria {
+    background: #ffffff;
+    width: 265;
+    padding: 5px;
+    margin: 10px;
+    float: left;
+}
+
+.noticia {
+    background: #e5e5e5;
+    padding: 5px;
+    width: 280px;
+    float: left;
+    margin: 7px;
+}
+
+.clear {
+    clear: both;
+}
